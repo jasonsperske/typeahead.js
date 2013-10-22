@@ -17,7 +17,7 @@ Other methods:
 * [Download zipball of latest release][zipball].
 * Download latest *[typeahead.js][typeahead.js]* or *[typeahead.min.js][typeahead.min.js]*.
 
-**Note:** typeahead.js has a dependency on [jQuery][jquery] 1.9+, which must be loaded before *typeahead.js*.
+**Note:** typeahead.js tests have a dependency on [jQuery][jquery] 1.9+, which must be loaded before *typeahead.js*, however the library can be made to work with [Zepto.js][zepto.js] provided you load [Zepto.js][zepto.js], the [Zepto.js Data module][zepto-data.js] and [simply-deferred][simply-deferred] before before *typeahead.js*.
 
 Examples
 --------
@@ -357,3 +357,6 @@ Licensed under the MIT License
 [hogan.js]: http://twitter.github.com/hogan.js/
 [bootstrap]: http://twitter.github.com/bootstrap/
 [typeahead.js-bootstrap.css]: https://github.com/jharding/typeahead.js-bootstrap.css
+[zepto.js]: https://github.com/madrobby/zepto
+[zepto-data.js]: https://github.com/madrobby/zepto/blob/master/src/data.js
+[simply-deferred]: https://github.com/sudhirj/simply-deferred
