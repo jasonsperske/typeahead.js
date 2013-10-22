@@ -77,13 +77,13 @@
     }
   };
 
-  jQuery.fn.typeahead = function(method) {
-    if (methods[method]) {
-      return methods[method].apply(this, [].slice.call(arguments, 1));
+  $.extend($.fn, {
+    typeahead: function(method) {
+      if (methods[method]) {
+        return methods[method].apply(this, [].slice.call(arguments, 1));
+      } else {
+        return methods.initialize.apply(this, arguments);
+      }
     }
-
-    else {
-      return methods.initialize.apply(this, arguments);
-    }
-  };
+  });
 })();

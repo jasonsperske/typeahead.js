@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '<%= banner %>',
-        enclose: { 'window.jQuery': '$' }
+        enclose: { 'window.$': '$' }
       },
       js: {
         options: {
@@ -78,12 +78,20 @@ module.exports = function(grunt) {
     },
 
     jasmine: {
-      js: {
+      jquery: {
         src: jsFiles,
         options: {
           specs: 'test/*_spec.js',
-          helpers: 'test/helpers/*',
-          vendor: 'test/vendor/*'
+          helpers: ['test/helpers/jasmine-jquery.js','test/helpers/mock_components.js','test/helpers/mock-ajax.js'],
+          vendor: ['test/vendor/jquery-1.9.1.js','test/vendor/hogan-2.0.0.js']
+        }
+      },
+      zepto: {
+        src: jsFiles,
+        options: {
+          specs: 'test/*_spec.js',
+          helpers: ['test/helpers/jasmine-zepto.js','test/helpers/mock_components.js','test/helpers/mock-ajax.js'],
+          vendor: ['test/vendor/zepto-1.0.js','test/vendor/zepto-1.0-data.js','test/vendor/deferred-2.4.0.js']
         }
       }
     },
@@ -214,7 +222,8 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['uglify', 'sed:version']);
   grunt.registerTask('server', 'connect:server');
   grunt.registerTask('lint', 'jshint');
-  grunt.registerTask('test', 'jasmine:js');
+  grunt.registerTask('test:jquery', 'jasmine:jquery');
+  grunt.registerTask('test:zepto', 'jasmine:zepto');
   grunt.registerTask('test:browser', ['jasmine:js:build', 'exec:open_spec_runner']);
   grunt.registerTask('dev', 'parallel:dev');
 

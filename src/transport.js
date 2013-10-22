@@ -70,12 +70,13 @@ var Transport = (function() {
     },
 
     _sendRequest: function(url) {
-      var that = this, jqXhr = pendingRequests[url];
+      var that = this, jqXhr = pendingRequests[url], ajaxOptions = {'url': url};
 
       if (!jqXhr) {
         incrementPendingRequests();
+        $.extend(ajaxOptions, this.ajaxSettings);
         jqXhr = pendingRequests[url] =
-          $.ajax(url, this.ajaxSettings).always(always);
+          $.ajax(ajaxOptions).always(always);
       }
 
       return jqXhr;

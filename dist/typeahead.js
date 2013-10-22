@@ -326,10 +326,13 @@
                 }
             },
             _sendRequest: function(url) {
-                var that = this, jqXhr = pendingRequests[url];
+                var that = this, jqXhr = pendingRequests[url], ajaxOptions = {
+                    url: url
+                };
                 if (!jqXhr) {
                     incrementPendingRequests();
-                    jqXhr = pendingRequests[url] = $.ajax(url, this.ajaxSettings).always(always);
+                    $.extend(ajaxOptions, this.ajaxSettings);
+                    jqXhr = pendingRequests[url] = $.ajax(ajaxOptions).always(always);
                 }
                 return jqXhr;
                 function always() {
@@ -1128,12 +1131,14 @@
                 }
             }
         };
-        jQuery.fn.typeahead = function(method) {
-            if (methods[method]) {
-                return methods[method].apply(this, [].slice.call(arguments, 1));
-            } else {
-                return methods.initialize.apply(this, arguments);
+        $.extend($.fn, {
+            typeahead: function(method) {
+                if (methods[method]) {
+                    return methods[method].apply(this, [].slice.call(arguments, 1));
+                } else {
+                    return methods.initialize.apply(this, arguments);
+                }
             }
-        };
+        });
     })();
-})(window.jQuery);
+})(window.$);
